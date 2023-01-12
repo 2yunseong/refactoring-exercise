@@ -30,8 +30,7 @@ function playFor(perf) {
 
 function statement(invoice, plays) {
   let totalAmount = 0;
-  let volumeCredits = 0; // 포인트
-
+  let volumeCredits = 0;
   let result = `청구내역: (고객명: ${invoice.customer})\n`;
   const format = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -40,13 +39,7 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    // 포인트 적립
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // 희극 관객 5명마다 추가 포인트 제공
-    if ('comedy' === playFor(perf).type)
-      volumeCredits += Math.floor(perf.audience / 5);
-
-    // 청구 내역 출력
+    volumeCredits += volumeCreditsFor(perf);
     result += `${playFor(perf).name}: ${format(
       amountFor(perf, playFor(perf)) / 100
     )} (${perf.audience}석)\n`;
@@ -60,3 +53,9 @@ function statement(invoice, plays) {
 exports.statement = statement;
 exports.amountFor = amountFor;
 exports.playFor = playFor;
+function volumeCreditsFor(perf) {
+  let result = 0; // 포인트
+  result += Math.max(perf.audience - 30, 0);
+  if ('comedy' === playFor(perf).type) result += Math.floor(perf.audience / 5);
+  return result;
+}
