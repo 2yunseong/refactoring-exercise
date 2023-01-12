@@ -1,4 +1,4 @@
-const { statement, amountFor } = require('../src/index');
+const { statement, amountFor, playFor } = require('../src/index');
 const invoice = require('../src/data/invoice');
 const plays = require('../src/data/plays');
 
@@ -30,5 +30,13 @@ describe('Chap01: Unit Test', () => {
     expect(() => {
       amountFor(errorPerf, errorPlay);
     }).toThrow('알수 없는 장르');
+  });
+  test('playFor: 공연의 공연명을 가져오는 질의함수', () => {
+    expect(
+      playFor({
+        playID: 'hamlet',
+        audience: 55,
+      })
+    ).toEqual(plays['hamlet']);
   });
 });
