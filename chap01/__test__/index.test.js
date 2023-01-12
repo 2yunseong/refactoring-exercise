@@ -1,4 +1,10 @@
-const { statement, amountFor, playFor } = require('../src/index');
+const {
+  statement,
+  amountFor,
+  playFor,
+  volumeCreditsFor,
+  usd,
+} = require('../src/index');
 const invoice = require('../src/data/invoice');
 const plays = require('../src/data/plays');
 
@@ -24,5 +30,22 @@ describe('Chap01: Unit Test', () => {
         audience: 55,
       })
     ).toEqual(plays['hamlet']);
+  });
+
+  test('volumesCreditsFor: 적립 포인트 계산 기능', () => {
+    const answerSheet = [25, 12, 15];
+
+    invoice.performances.forEach((perf, index) => {
+      expect(volumeCreditsFor(perf)).toEqual(answerSheet[index]);
+    });
+  });
+
+  test('usd: 달러 포맷 출력 기능', () => {
+    const tests = [10000, 1000, 100, 102, 1034];
+    const answers = ['$100.00', '$10.00', '$1.00', '$1.02', '$10.34'];
+
+    tests.forEach((target, index) => {
+      expect(usd(target)).toEqual(answers[index]);
+    });
   });
 });
