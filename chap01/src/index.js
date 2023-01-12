@@ -1,31 +1,7 @@
-// 공연료 청구서를 출력하는 코드
-// invoice : 공연료 청구서에 들어갈 데이터
-// plays : 공연할 연극 정보
+const invoice = require('./data/invoice');
+const plays = require('./data/plays');
 
-const invoice = {
-  customer: 'yunseong',
-  performances: [
-    {
-      playID: 'hamlet',
-      audience: 55,
-    },
-    {
-      playID: 'as-like',
-      audience: 35,
-    },
-    {
-      playID: 'othello',
-      audience: 45,
-    },
-  ],
-};
-const plays = {
-  hamlet: { name: 'hamlet', type: 'tragedy' },
-  'as-like': { name: 'As you like it', type: 'comedy' },
-  othello: { name: 'Othello', type: 'tragedy' },
-};
-
-export function statement(invoice, plays) {
+function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0; // 포인트
 
@@ -73,4 +49,4 @@ export function statement(invoice, plays) {
   return result;
 }
 
-console.log(statement(invoice, plays));
+module.exports = statement;
