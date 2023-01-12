@@ -13,23 +13,9 @@ describe('Chap01: Integrate Test', () => {
 describe('Chap01: Unit Test', () => {
   test('amountFor: 공연비 계산 기능', () => {
     const { performances } = invoice;
-    const errorPerf = {
-      playID: 'error',
-      audience: 40,
-    };
-    const errorPlay = {
-      name: 'error',
-      type: 'error',
-    };
-    expect(amountFor(performances[0], plays[performances[0].playID])).toEqual(
-      65000
-    );
-    expect(amountFor(performances[1], plays[performances[1].playID])).toEqual(
-      58000
-    );
-    expect(() => {
-      amountFor(errorPerf, errorPlay);
-    }).toThrow('알수 없는 장르');
+
+    expect(amountFor(performances[0])).toEqual(65000);
+    expect(amountFor(performances[1])).toEqual(58000);
   });
   test('playFor: 공연의 공연명을 가져오는 질의함수', () => {
     expect(
