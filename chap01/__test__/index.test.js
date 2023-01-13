@@ -4,6 +4,7 @@ const {
   playFor,
   volumeCreditsFor,
   usd,
+  totalVolumeCredits,
 } = require('../src/index');
 const invoice = require('../src/data/invoice');
 const plays = require('../src/data/plays');
@@ -47,5 +48,9 @@ describe('Chap01: Unit Test', () => {
     tests.forEach((target, index) => {
       expect(usd(target)).toEqual(answers[index]);
     });
+  });
+
+  test('totalVolumeCredits: 보너스 총합 계산', () => {
+    expect(totalVolumeCredits()).toEqual(52);
   });
 });
