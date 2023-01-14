@@ -60,6 +60,11 @@ function totalAmount() {
 }
 
 function statement(invoice, plays) {
+  let result = renderPlainText(invoice);
+  return result;
+}
+
+function renderPlainText(invoice) {
   let result = `청구내역: (고객명: ${invoice.customer})\n`;
 
   for (let perf of invoice.performances) {
