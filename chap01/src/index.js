@@ -59,13 +59,16 @@ function totalAmount() {
   return result;
 }
 
-function statement(invoice, plays) {
-  let result = renderPlainText(invoice);
+function statement(invoice) {
+  const statementData = {};
+  statementData.customer = invoice.customer;
+
+  let result = renderPlainText(statementData, invoice);
   return result;
 }
 
-function renderPlainText(invoice) {
-  let result = `청구내역: (고객명: ${invoice.customer})\n`;
+function renderPlainText(data, invoice) {
+  let result = `청구내역: (고객명: ${data.customer})\n`;
 
   for (let perf of invoice.performances) {
     result += `${playFor(perf).name}: ${usd(amountFor(perf, playFor(perf)))} (${
