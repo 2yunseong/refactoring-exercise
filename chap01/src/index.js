@@ -62,15 +62,20 @@ function totalAmount() {
 function statement(invoice) {
   const statementData = {};
   statementData.customer = invoice.customer;
+  statementData.performances = invoice.performances.map(enrichPerformance);
 
   let result = renderPlainText(statementData, invoice);
   return result;
 }
 
+function enrichPerformance(aPerformance) {
+  const result = { ...aPerformance };
+  return result;
+}
 function renderPlainText(data, invoice) {
   let result = `청구내역: (고객명: ${data.customer})\n`;
 
-  for (let perf of invoice.performances) {
+  for (let perf of data.performances) {
     result += `${playFor(perf).name}: ${usd(amountFor(perf, playFor(perf)))} (${
       perf.audience
     }석)\n`;
